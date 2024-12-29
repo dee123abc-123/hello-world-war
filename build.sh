@@ -6,3 +6,4 @@ fi
 cd hello-world-war
 mvn clean package
 ls
+pwd
