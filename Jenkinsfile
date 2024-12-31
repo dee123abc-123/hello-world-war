@@ -1,15 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('checkout') {
             steps {
-                echo 'Hello World'
+                sh 'git clone https://github.com/dee123abc-123/hello-world-war'
             }
-             stage('sample') {
+        }
+             stage('build') {
             steps {
+                sh 'cd hello-world war'
                 echo 'Hello Devops'
             }
         }
     }
 }
-}
+
