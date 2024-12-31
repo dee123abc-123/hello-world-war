@@ -9,7 +9,7 @@ pipeline {
              stage('build') {
             steps {
                 sh 'cd hello-world war'
-                echo 'Hello Devops'
+                sh 'mvn clean package'
             }
         }
     }
