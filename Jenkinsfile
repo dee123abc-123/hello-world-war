@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave_123' }
+    agent { label 'slave_95' }
     stages {
         stage('checkout') {
             steps {
