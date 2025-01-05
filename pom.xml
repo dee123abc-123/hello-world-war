@@ -34,8 +34,8 @@
 	</build>
 	<!---add your own sonar account details -->
 	<properties>
-	    <sonar.projectKey>adurikedharnadh_hello-world-war-repo</sonar.projectKey>
+	    <sonar.projectKey>dee123abc-123_hello-world-war</sonar.projectKey>
 	    <sonar.organization>adurikedharnadh</sonar.organization>
-	    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	    <sonar.host.url>https://dee123abc-123</sonar.host.url>
 </properties>
 </project>
