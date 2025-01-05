@@ -42,7 +42,7 @@ pipeline {
                       -Dsonar.projectKey=adurikedharnadh_hello-world-war-repo \
                       -Dsonar.organization=adurikedharnadh \
                       -Dsonar.host.url=https://sonarcloud.io \
-                      -Dsonar.login=$SONAR_TOKEN
+                      -Dsonar.token=$SONAR_TOKEN
                     '''
                 }
             }
