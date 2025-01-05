@@ -13,7 +13,7 @@ pipeline {
         stage('checkout') {             
             steps {
                 sh 'rm -rf hello-world-war'
-                sh 'git clone https://github.com/adurikedharnadh/hello-world-war.git'
+                sh 'https://github.com/dee123abc-123/hello-world-war.git'
             }
         }
          stage('build') { 
@@ -39,8 +39,8 @@ pipeline {
                 withSonarQubeEnv('SonarCloud') {
                     sh '''
                     mvn sonar:sonar \
-                      -Dsonar.projectKey=adurikedharnadh_hello-world-war-repo \
-                      -Dsonar.organization=adurikedharnadh \
+                      -Dsonar.projectKey=dee123abc-123_hello-world-war \
+                      -Dsonar.organization=dee123abc-123 \
                       -Dsonar.host.url=https://sonarcloud.io \
                       -Dsonar.token=$SONAR_TOKEN
                     '''
