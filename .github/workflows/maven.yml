@@ -54,6 +54,9 @@ jobs:
       # Step 2: Verify Maven installation
       - name: Verify Maven installation
         run: mvn -v
+
+      - name: Debug Maven Path
+        run: which mvn
         
       # Build the project with Maven
       - name: Build with Maven
