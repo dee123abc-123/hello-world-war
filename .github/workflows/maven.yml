@@ -38,9 +38,10 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: 
-          
-     # Step 1: Install Maven (if not installed already)
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 1: Install Maven (if not installed already)
       - name: Install Maven
         run: |
           if ! command -v mvn &> /dev/null; then
@@ -53,10 +54,19 @@ jobs:
 
       # Step 2: Verify Maven installation
       - name: Verify Maven installation
-        run: mvn -v
+        run: |
+          mvn -v
+          echo "JAVA_HOME=$JAVA_HOME"
+          echo "PATH=$PATH"
 
+      # Step 3: Debug Maven Path
       - name: Debug Maven Path
         run: which mvn
+
+      # Build the project with Maven
+      - name: Build with Maven
+        run: mvn clean install
+
         
       # Build the project with Maven
       - name: Build with Maven
