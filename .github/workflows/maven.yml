@@ -56,12 +56,6 @@ jobs:
       - name: Verify Maven installation
         run: |
           mvn -v
-          echo "JAVA_HOME=$JAVA_HOME"
-          echo "PATH=$PATH"
-
-      # Step 3: Debug Maven Path
-      - name: Debug Maven Path
-        run: which mvn
 
       # Build the project with Maven
       - name: Build with Maven
