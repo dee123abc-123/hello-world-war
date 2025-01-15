@@ -1,63 +1,31 @@
 pipeline {
     agent any
-    //tools {
-     //   maven 'Maven-3.4.0' // Specify your Maven version if using Maven
-     //   jdk 'JDK11'         // Specify your JDK version
-    //}
-    environment {
-        SONAR_TOKEN = credentials('Sonar_Token1') // Store token in Jenkins credentials
-    }
-    
        stages 
     {
         stage('checkout') {             
             steps {
-                sh 'rm -rf hello-world-war'
-                sh 'git clone https://github.com/dee123abc-123/hello-world-war.git'
+                withCredentials([usernamePassword(credentialsId: 'Jfrog_cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                sh """
+                #!/bin/bash
+                sleep 60
+                sudo su
+                cd /opt/apache-tomcat-10.1.34/webapps
+                ls
+                curl -L -u "$USER:$PASS" -O "http://3.109.60.44:8082/artifactory/hello_world_war-libs-release/com/efsavage/hello-world-war/1.0.15/hello-world-war-1.0.15.war"
+                pwd
+                cd /opt/apache-tomcat-10.1.34/bin
+                ./shutdown.sh
+                sleep 6
+                pwd
+                
+                pwd
+                cd /opt/apache-tomcat-10.1.34/bin
+                ./startup.sh
+                sleep 6
+                """ 
+                        
             }
         }
-         stage('build') { 
-            steps {
-                sh 'cd hello-world-war'
-                sh 'mvn clean package'
-            }
-        }
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn clean install' // Adjust for your build tool
-            }
-        }
-        //add your own sonar account details  
-        stage('SonarCloud Analysis') {
-            steps {
-                withSonarQubeEnv('SonarCloud') {
-                    sh '''
-                    mvn sonar:sonar \
-                      -Dsonar.projectKey=dee123abc-123_hello-world-war \
-                      -Dsonar.organization=dee123abc-123 \
-                      -Dsonar.host.url=https://sonarcloud.io \
-                      -Dsonar.token=$SONAR_TOKEN
-                    '''
-                }
-            }
-        }
-        stage('Quality Gate') {
-            steps {
-                script {
-                    def qg = waitForQualityGate()
-                    if (qg.status != 'OK') {
-                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    }
-                }
-            }
-        }
-    }
-    }
-
-   
+         
+    }
+}
