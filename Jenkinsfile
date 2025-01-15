@@ -4,7 +4,7 @@ pipeline {
        Sample_creds = credentials('Jfrog_cred')
     }
        stages 
-    {
+            {
         stage('checkout') {             
             steps {
                 sh """
@@ -24,9 +24,8 @@ pipeline {
                 cd /opt/apache-tomcat-10.1.34/bin
                 ./startup.sh
                 sleep 6
-                """ 
-                       
+                """       
             }
-        }  
-    }
+        }
+    }
 }
